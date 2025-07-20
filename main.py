@@ -14,6 +14,7 @@ def start_schedule(interval_seconds=37):
         common.log("终止定时任务：未找到目标窗口")
         return
 
+    click_f_once(target_window)
     schedule.every(interval_seconds).seconds.do(lambda: click_f_once(target_window))
     common.log(f"开始定时任务，每 {interval_seconds} 秒执行一次")
 
