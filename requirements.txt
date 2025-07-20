@@ -1,0 +1,4 @@
+pygetwindow
+pyautogui
+schedule
+pywin32
