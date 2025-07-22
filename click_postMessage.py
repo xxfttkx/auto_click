@@ -27,13 +27,14 @@ def click_f_once(win):
 
         hwnd = win._hWnd
         send_key(hwnd, 'f')
-        pyautogui.keyDown('alt')
-        pyautogui.press('tab')
-        pyautogui.keyUp('alt')
+        # pyautogui.keyDown('alt')
+        # pyautogui.press('tab')
+        # pyautogui.keyUp('alt')
         common.log(f"底层模拟按下 F 键")
         if original_win:
             try:
-                original_win.activate()
+                common.activate_window(original_win._hWnd)
+                # original_win.activate()
             except Exception as e:
                 common.log(f"激活{original_win.title}失败: {e}")
             pyautogui.moveTo(original_mouse_pos.x, original_mouse_pos.y)

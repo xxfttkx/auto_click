@@ -1,5 +1,10 @@
 from datetime import datetime
 import pygetwindow as gw
+import win32gui
+import win32con
+import win32com.client
+import time
+
 
 def log(msg):
     """带时间前缀的打印函数"""
@@ -15,3 +20,10 @@ def find_target_window():
             return w
     log("未找到游戏窗口")
     return None
+
+def activate_window(hwnd):
+    shell = win32com.client.Dispatch("WScript.Shell")
+    shell.SendKeys('%')  # Alt键以绕过权限问题
+    # win32gui.ShowWindow(hwnd, win32con.SW_SHOW)
+    time.sleep(0.1)
+    win32gui.SetForegroundWindow(hwnd)

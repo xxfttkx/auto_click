@@ -1,3 +1,4 @@
+import sys
 import time
 import schedule
 import argparse
@@ -27,6 +28,7 @@ def start_schedule(click_func, interval_seconds=10):
         time.sleep(1)
 
 if __name__ == "__main__":
+    sys.stdout.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser(description="自动点击脚本")
     parser.add_argument(
         "--method",
