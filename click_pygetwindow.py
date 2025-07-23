@@ -10,15 +10,13 @@ def click_f_once(target_window):
 
     original_win = gw.getActiveWindow()
     original_mouse_pos = pyautogui.position()
-
     try:
         target_window.activate()
-        pyautogui.press('f')
-        common.log("按下F键")
     except Exception as e:
         common.log(f"激活目标窗口失败: {e}")
         return
-
+    pyautogui.press('f')
+    common.log("按下F键")
     if original_win:
         try:
             original_win.activate()
