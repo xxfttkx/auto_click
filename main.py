@@ -34,7 +34,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="自动点击脚本")
     parser.add_argument(
         "--method",
-        choices=["postMessage", "pygetwindow","postMessage_esc","pygetwindow_move"],
+        choices=["postMessage", "pygetwindow","postMessage_esc","pygetwindow_move","move"],
         default="pygetwindow",
         help="选择使用的方法：postMessage 或 pygetwindow（默认）"
     )
@@ -51,7 +51,8 @@ if __name__ == "__main__":
         "postMessage": postMessage_click,
         "postMessage_esc": postMessage_click_esc,
         "pygetwindow": pygetwindow_click,
-        "pygetwindow_move": pygetwindow_click_move
+        "pygetwindow_move": pygetwindow_click_move,
+        "move": pygetwindow_click_move
     }
     common.log(f"{args.method} 方法被选中，间隔 {args.interval} 秒")
     click_func = methods.get(args.method, pygetwindow_click)

@@ -13,7 +13,7 @@ def click_f_once(target_window):
     try:
         target_window.activate()
     except Exception as e:
-        common.log(f"激活目标窗口失败: {e}")
+        common.log(f"Exception: {e}")
         return
     pyautogui.press('f')
     common.log("按下F键")

@@ -23,7 +23,7 @@ def click_f_once(win):
         try:
             win.activate()
         except Exception as e:
-            common.log(f"激活窗口失败: {e}")
+            common.log(f"Exception: {e}")
 
         hwnd = win._hWnd
         send_key(hwnd, 'f')
