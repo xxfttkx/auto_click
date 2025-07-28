@@ -25,6 +25,15 @@ python main.py [--method {postMessage,pygetwindow}] [--interval 秒数]
 | `--method`   | 点击方法，可选：`postMessage` 或 `pygetwindow` | `pygetwindow` |
 | `--interval` | 每次点击之间的时间间隔（单位：秒）             | `37` 秒       |
 
+### `--method` 取值说明
+
+| 取值               | 对应文件                    | 说明                                                                                  |
+| ------------------ | --------------------------- | ------------------------------------------------------------------------------------- |
+| `postMessage`      | `click_postMessage.py`      | 使用 Windows 消息发送 `F` 键                                                          |
+| `postMessage_esc`  | `click_postMessage_esc.py`  | 使用 Windows 消息发送 `F` 键。按 ESC 后侧边栏展开时使用，方便后台挂机                 |
+| `pygetwindow`      | `click_pygetwindow.py`      | 使用 `pyautogui.press` 按下 `F` 键                                                    |
+| `pygetwindow_move` | `click_pygetwindow_move.py` | 使用 `pyautogui.press` 按下 `F` 键并循环移动。参数在`click_pygetwindow_move.py`中调整 |
+
 ### 示例
 
 ```bash
