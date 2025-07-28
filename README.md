@@ -44,11 +44,6 @@ python main.py
 python main.py --method postMessage --interval 18
 ```
 
-## 🛠️ 支持的方法说明
-
-- `pygetwindow`：通过控制窗口与模拟鼠标点击完成操作。
-- `postMessage`：通过 Windows API 向窗口发送点击消息。
-
 ## 📝 注意事项
 
 - 部分方法可能需要以管理员权限运行脚本。
