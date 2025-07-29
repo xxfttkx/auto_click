@@ -4,7 +4,9 @@ import common
 
 # 定义要按的键序列
 yama = [[('a', 1.2),('w',0.3)],[('d', 1.2),('w',0.3)], ('s', 1)]
-key_sequence = yama
+balukuang = [('a',1),('d',1)]
+balukuang_2 = [('w',1.5),[('d',0.3),('w',0.3)],[('s',2.1),('a',0.4)]]
+key_sequence = balukuang_2
 current_index = 0  # 记录当前要按的键
 
 def click_f_once(target_window):
