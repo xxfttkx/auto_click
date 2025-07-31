@@ -9,7 +9,16 @@ from click_postMessage import click_f_once as postMessage_click
 from click_postMessage_esc import click_f_once as postMessage_click_esc
 from click_pygetwindow import click_f_once as pygetwindow_click
 from click_pygetwindow_move import click_f_once as pygetwindow_click_move
-
+from click_pygetwindow_move import yama, balukuang, balukuang_1, shihuiyan, fulunakuand, fulunakuand_1, lunakuang
+sequences = {
+    "yama": yama,
+    "balukuang": balukuang,
+    "balukuang_1": balukuang_1,
+    "shihuiyan": shihuiyan,
+    "fulunakuand": fulunakuand,
+    "fulunakuand_1": fulunakuand_1,
+    "lunakuang": lunakuang
+}
 # 保存目标窗口
 target_window = None
 
@@ -21,6 +30,7 @@ def start_schedule(click_func, interval_seconds=10):
         common.log("终止定时任务：未找到目标窗口")
         return
 
+    common.log("最先运行一次")
     click_func(target_window)
     schedule.every(interval_seconds).seconds.do(lambda: click_func(target_window))
     common.log(f"开始定时任务，每 {interval_seconds} 秒执行一次")
@@ -32,30 +42,54 @@ def start_schedule(click_func, interval_seconds=10):
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser(description="自动点击脚本")
+
+    methods = {
+        "postMessage": postMessage_click,
+        "pm": postMessage_click,
+        
+        "postMessage_esc": postMessage_click_esc,
+        "pm_esc": postMessage_click_esc,
+        "esc": postMessage_click_esc,
+
+        "pygetwindow": pygetwindow_click,
+        "pgw": pygetwindow_click,
+
+        "pygetwindow_move": pygetwindow_click_move,
+        "pgw_move": pygetwindow_click_move,
+        "pgw_mv": pygetwindow_click_move,
+        "move": pygetwindow_click_move,  # 可保留原名也可缩为 mv
+        "mv": pygetwindow_click_move
+    }
+
     parser.add_argument(
-        "--method",
-        choices=["postMessage", "pygetwindow","postMessage_esc","pygetwindow_move","move"],
+        "--method","-m",
+        choices = methods.keys(),
         default="pygetwindow",
         help="选择使用的方法：postMessage 或 pygetwindow（默认）"
     )
     parser.add_argument(
-        "--interval",
+        "--interval","-i",
         type=int,
         default=37,
         help="设置点击间隔（秒）"
     )
-
+    parser.add_argument(
+        "--sequence","-s",
+        choices=["yama", "balukuang", "balukuang_1", "shihuiyan", "fulunakuand", "fulunakuand_1", "lunakuang"],
+        default="balukuang",
+        help="指定键位序列，仅在 method=move 时有效"
+    )
     args = parser.parse_args()
+    # 设置序列：只在 move 相关方法中有效
+    if args.method in ["mv","move", "pgw_mv","pgw_move","pygetwindow_move"]:
+        from click_pygetwindow_move import set_key_sequence  # 你需要在模块中提供 setter
+        key_seq = sequences.get(args.sequence, shihuiyan)
+        set_key_sequence(key_seq)
+        common.log(f"使用按键序列：{args.sequence}")
 
-    methods = {
-        "postMessage": postMessage_click,
-        "postMessage_esc": postMessage_click_esc,
-        "pygetwindow": pygetwindow_click,
-        "pygetwindow_move": pygetwindow_click_move,
-        "move": pygetwindow_click_move
-    }
+
+
     common.log(f"{args.method} 方法被选中，间隔 {args.interval} 秒")
+
     click_func = methods.get(args.method, pygetwindow_click)
-
-
     start_schedule(click_func, args.interval)
