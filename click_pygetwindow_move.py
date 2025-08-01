@@ -47,5 +47,6 @@ def click_f_once(target_window):
     time.sleep(0.3)  # 等待一段时间，避免过快切换
     # 切换到下一个键
     current_index = (current_index + 1) % len(key_sequence)
+    pyautogui.scroll(-500)
     pyautogui.press('f')
     common.log("按下F键")

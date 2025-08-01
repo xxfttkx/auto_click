@@ -1,5 +1,5 @@
+from pyautogui import sleep
 import pyautogui
-import pygetwindow as gw
 import win32con
 import win32gui
 import win32api
@@ -24,6 +24,7 @@ def click_f_once(win):
             common.log(f"Exception: {e}")
 
         hwnd = win._hWnd
+        pyautogui.scroll(-500)
         send_key(hwnd, 'f')
         common.log(f"底层模拟按下 F 键")
     else:

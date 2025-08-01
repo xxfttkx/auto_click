@@ -15,6 +15,7 @@ def click_f_once(target_window):
     except Exception as e:
         common.log(f"Exception: {e}")
         return
+    pyautogui.scroll(-500)
     pyautogui.press('f')
     common.log("按下F键")
     if original_win:

@@ -26,6 +26,7 @@ def click_f_once(win):
             common.log(f"Exception: {e}")
 
         hwnd = win._hWnd
+        pyautogui.scroll(-500)
         send_key(hwnd, 'f')
         # pyautogui.keyDown('alt')
         # pyautogui.press('tab')
