@@ -52,11 +52,11 @@ if __name__ == "__main__":
         "esc": postMessage_click_esc,
 
         "pyautogui": pyautogui_click,
-        "pgw": pyautogui_click,
+        "pag": pyautogui_click,
 
         "pyautogui_move": pyautogui_click_move,
-        "pgw_move": pyautogui_click_move,
-        "pgw_mv": pyautogui_click_move,
+        "pag_move": pyautogui_click_move,
+        "pag_mv": pyautogui_click_move,
         "move": pyautogui_click_move,  # 可保留原名也可缩为 mv
         "mv": pyautogui_click_move
     }
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     # 设置序列：只在 move 相关方法中有效
-    if args.method in ["mv","move", "pgw_mv","pgw_move","pyautogui_move"]:
+    if args.method in ["mv","move", "pag_mv","pag_move","pyautogui_move"]:
         from click_pyautogui_move import set_key_sequence  # 你需要在模块中提供 setter
         key_seq = sequences.get(args.sequence, shihuiyan)
         set_key_sequence(key_seq)
