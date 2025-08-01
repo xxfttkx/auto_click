@@ -7,9 +7,9 @@ import common
 # 提前导入不同版本的 click_f_once，稍后根据参数选择
 from click_postMessage import click_f_once as postMessage_click
 from click_postMessage_esc import click_f_once as postMessage_click_esc
-from click_pygetwindow import click_f_once as pygetwindow_click
-from click_pygetwindow_move import click_f_once as pygetwindow_click_move
-from click_pygetwindow_move import yama, balukuang, balukuang_1, shihuiyan, fulunakuand, fulunakuand_1, lunakuang
+from click_pyautogui import click_f_once as pyautogui_click
+from click_pyautogui_move import click_f_once as pyautogui_click_move
+from click_pyautogui_move import yama, balukuang, balukuang_1, shihuiyan, fulunakuand, fulunakuand_1, lunakuang
 sequences = {
     "yama": yama,
     "balukuang": balukuang,
@@ -51,21 +51,21 @@ if __name__ == "__main__":
         "pm_esc": postMessage_click_esc,
         "esc": postMessage_click_esc,
 
-        "pygetwindow": pygetwindow_click,
-        "pgw": pygetwindow_click,
+        "pyautogui": pyautogui_click,
+        "pgw": pyautogui_click,
 
-        "pygetwindow_move": pygetwindow_click_move,
-        "pgw_move": pygetwindow_click_move,
-        "pgw_mv": pygetwindow_click_move,
-        "move": pygetwindow_click_move,  # 可保留原名也可缩为 mv
-        "mv": pygetwindow_click_move
+        "pyautogui_move": pyautogui_click_move,
+        "pgw_move": pyautogui_click_move,
+        "pgw_mv": pyautogui_click_move,
+        "move": pyautogui_click_move,  # 可保留原名也可缩为 mv
+        "mv": pyautogui_click_move
     }
 
     parser.add_argument(
         "--method","-m",
         choices = methods.keys(),
-        default="pygetwindow",
-        help="选择使用的方法：postMessage 或 pygetwindow（默认）"
+        default="pyautogui",
+        help="选择使用的方法：postMessage 或 pyautogui（默认）"
     )
     parser.add_argument(
         "--interval","-i",
@@ -81,8 +81,8 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     # 设置序列：只在 move 相关方法中有效
-    if args.method in ["mv","move", "pgw_mv","pgw_move","pygetwindow_move"]:
-        from click_pygetwindow_move import set_key_sequence  # 你需要在模块中提供 setter
+    if args.method in ["mv","move", "pgw_mv","pgw_move","pyautogui_move"]:
+        from click_pyautogui_move import set_key_sequence  # 你需要在模块中提供 setter
         key_seq = sequences.get(args.sequence, shihuiyan)
         set_key_sequence(key_seq)
         common.log(f"使用按键序列：{args.sequence}")
@@ -91,5 +91,5 @@ if __name__ == "__main__":
 
     common.log(f"{args.method} 方法被选中，间隔 {args.interval} 秒")
 
-    click_func = methods.get(args.method, pygetwindow_click)
+    click_func = methods.get(args.method, pyautogui_click)
     start_schedule(click_func, args.interval)
